@@ -1,0 +1,5 @@
+{
+  "name": "ProfileHub",
+  "description": "A comprehensive profile management system for college students and administrators featuring resume building, document management, and role-based access control.",
+  "requestFramePermissions": []
+}
