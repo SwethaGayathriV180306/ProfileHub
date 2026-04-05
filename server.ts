@@ -135,9 +135,14 @@ const startServer = async () => {
     // Serve static files from the React app
     app.use(express.static(path.join(__dirname, 'dist')));
 
-    // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+    // The "catchall" handler: Express 5 requires middleware instead of '*' strings for global catches
+    app.use((req, res) => {
+      // Only serve index.html for GET requests
+      if (req.method === 'GET') {
+        res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+      } else {
+        res.status(404).json({ message: 'API Route Not Found' });
+      }
     });
   }
 
